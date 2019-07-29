@@ -1,3 +1,11 @@
+<!--<button  class="btn btn-primary" (click)="showSecret = !showSecret" >Display Details</button>-->
+<button class="btn btn-primary" (click)="onToggleDetails()">Display Details</button>
+<p *ngIf="showSecret">Secret Password = tuna</p>
+<p *ngFor="let click of clicks; let i = index"
+   [ngStyle]="{backgroundColor: i >= 4 ? 'blue' : 'transparent'}"
+   [ngClass]="{'white-text': i >= 4}"
+>{{ click }} </p>
+<br>
 <label>Server Name</label>
 <input
   type="text"
@@ -7,19 +15,21 @@
 <input
   type="text"
   class="form-control"
-  [(ngModel)] = "username">
+  [(ngModel)]="username">
 <p>{{ username }}</p>
 <br>
 <button
   class="btn badge"
   [disabled]="username.length == 0"
   (click)="onResetButton()"
->Reset User</button>
+>Reset User
+</button>
 <br><br><br><br>
 <button
   class="btn btn-primary"
   [disabled]="!allowNewServer"
-  (click)="onCreateServer()">Add Server</button>
+  (click)="onCreateServer()">Add Server
+</button>
 <!--<p [innerText]="allowNewServer"></p>-->
 <!--<p>{{ serverCreationStatus }}</p>-->
 <!--<p>{{ serverName }} </p>-->
@@ -29,6 +39,5 @@
   <p>No server was created!</p>
 </ng-template>
 
-<app-server></app-server>
-<app-server></app-server>
+<app-server *ngFor="let server of servers"></app-server>
 
